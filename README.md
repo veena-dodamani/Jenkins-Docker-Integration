@@ -13,6 +13,10 @@ DevOps Internship Week 4 project covering Docker and Docker Compose.
 - Multi-Container Applications
 - Docker Hub
 
+## Wednesday Work
+
+Completed Docker installation and verification, Docker images and containers, Dockerfile, Docker volumes, Docker networks, Docker Compose, and Docker Hub image push.
+
 ## Application
 
 - Frontend: Nginx
@@ -22,4 +26,3 @@ DevOps Internship Week 4 project covering Docker and Docker Compose.
 ## Docker Hub
 
 `veena74/week4-web:1.0`
-
