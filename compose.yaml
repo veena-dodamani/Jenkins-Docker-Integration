@@ -1,0 +1,40 @@
+services:
+  frontend:
+    build: .
+    container_name: week4-frontend
+    ports:
+      - "8082:80"
+    depends_on:
+      - backend
+    networks:
+      - week4-compose-network
+
+  backend:
+    build: ./backend
+    container_name: week4-backend
+    expose:
+      - "5000"
+    depends_on:
+      - db
+    networks:
+      - week4-compose-network
+
+  db:
+    image: mysql:8.0
+    container_name: week4-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: week4db
+      MYSQL_USER: week4user
+      MYSQL_PASSWORD: week4pass
+    volumes:
+      - week4-db-data:/var/lib/mysql
+    networks:
+      - week4-compose-network
+
+volumes:
+  week4-db-data:
+
+networks:
+  week4-compose-network:
+    driver: bridge
