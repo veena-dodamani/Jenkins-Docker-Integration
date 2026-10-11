@@ -4,7 +4,6 @@
 
 This project demonstrates containerization of a multi-tier web application using Docker and Docker Compose. It includes a frontend, backend, and database configured to run together in separate containers.
 
-## Technologies Used
 
 - Docker
 - Docker Compose
