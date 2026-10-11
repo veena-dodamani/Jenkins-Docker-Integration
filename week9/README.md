@@ -1,35 +1,71 @@
-# Week 9: CI/CD and Kubernates Deployment
+# Week 9: Kubernetes Rolling Updates and Rollback
 
-## Objective
-Practise Kubernates rolling updates, application verification, and rollback.
+## 1. Project Overview
 
-## Environment
+This project demonstrates hands-on practice with Kubernetes rolling updates, application verification, and rollback using a local Kubernetes cluster created with kind.
+
+## 2. Objectives
+
+- Perform rolling updates of a Kubernetes Deployment.
+- Verify application and Pod status after deployment.
+- Roll back to a previously working application version.
+- Document deployment and recovery procedures.
+
+## 3. Technologies Used
+
 - Docker
-- Kubernates with kind
+- Kubernetes
+- kind
 - kubectl
 - Git and GitHub
 
-## Rolling Deployment
-Updated the week4-frontend Deployment from image veena74/week4-web:1.1 to veena74/week4-web:1.2.
+## 4. Implementation
+
+### 4.1 Rolling Update
+
+Updated the `week4-frontend` Deployment from image version `1.1` to `1.2`.
 
 Commands used:
-- kind load docker-image veena74/week4-web:1.2 --name k8s-app
-- kubectl rollout status deployment/week4-frontend --timeout=120s
-- kubectl get deployment week4-frontend -o wide
-- kubectl get pods -l app=week4-frontend
 
-## Rollback
-Restored the previous working image using Kubernates rollout undo.
+```bash
+kind load docker-image veena74/week4-web:1.2 --name k8s-app
+kubectl rollout status deployment/week4-frontend --timeout=120s
+kubectl get deployment week4-frontend -o wide
+kubectl get pods -l app=week4-frontend
+```
 
-Commands:
-- kubectl rollout undo deployment/week4-frontend
-- kubectl rollout status deployment/week4-frontend --timeout=120s
+### 4.2 Rollback
 
-## Verification
-- Rolling update to image 1.2 completed successfully.
-- Rollback restored image veena74/week4-web:1.1.
-- Three frontend pods were Running and Ready.
-- The frontend welcome page was accessible through port forwarding.
+Restored the previous working image version `1.1` using Kubernetes rollout undo.
 
-## Notes
-This exercise demonstrates Kubernates rolling updates and rollback using an existing application. Jenkins pipeline automation and additional CI/CD evidence should be documented separately once verified.
+Commands used:
+
+```bash
+kubectl rollout undo deployment/week4-frontend
+kubectl rollout status deployment/week4-frontend --timeout=120s
+kubectl get deployment week4-frontend -o wide
+```
+
+## 5. Verification and Results
+
+- Successfully updated the frontend image to version `1.2`.
+- Verified that three frontend Pods were running and ready.
+- Successfully rolled back to image version `1.1`.
+- Confirmed that the frontend welcome page was accessible through port forwarding.
+
+## 6. Key Learnings
+
+- Kubernetes rolling updates and deployment strategies.
+- Deployment and Pod health verification.
+- Application availability checks.
+- Rollback and recovery using kubectl.
+
+## 7. Conclusion
+
+This hands-on exercise demonstrates Kubernetes deployment management, rolling updates, application verification, and rollback in a local development environment.
+
+## 8. Author
+
+**Veena Shivappa Dodamani**
+
+GitHub: https://github.com/veena-dodamani
