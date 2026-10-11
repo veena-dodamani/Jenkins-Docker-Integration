@@ -1,93 +1,68 @@
-This project demonstrates containerization of a multi-tier web application using Docker and Docker Compose. It includes a frontend, backend, and database configured to run together in separate containers.# DevOps Docker Containerization
+# Jenkins-Docker Integration
 
 ## Project Overview
 
-This project demonstrates containerization of a multi-tier web application using Docker and Docker Compose. It includes a frontend, backend, and database configured to run together in separate containers.
+This project demonstrates integrating Docker with Jenkins by creating a custom Jenkins Docker image with Docker tools installed.
 
 ## Technologies Used
 
+- Jenkins
 - Docker
-- Docker Compose
-- Nginx
-- Python
-- MySQL
-- Docker Hub
+- Dockerfile
+- Linux
+- Git and GitHub
 
-## Topics Covered
+## Project Structure
 
-- Docker Images and Containers
-- Dockerfile Creation
-- Container Port Mapping
-- Docker Volumes for Persistent Storage
-- Docker Networks for Container Communication
-- Docker Compose for Multi-Container Applications
-- Publishing Images to Docker Hub
-
-## Application Architecture
-
-- **Frontend:** Nginx
-- **Backend:** Python
-- **Database:** MySQL
-
-Docker Compose manages the application services and their communication.
-
-## Docker Hub
-
-The frontend Docker image is published on Docker Hub.
-
-- **Repository:** `veena74/week4-web`
-- **Tag:** `1.0`
-- **Image:** `veena74/week4-web:1.0`
-
-**Docker Hub Repository:**  
-https://hub.docker.com/r/veena74/week4-web
-
-## Getting Started
-
-### Prerequisites
-
-Install Docker and Docker Compose on your system.
-
-### Clone the Repository
-
-```bash
-git clone https://github.com/veena-dodamani/DevOps-Docker-Containerization.git
-cd DevOps-Docker-Containerization
+```text
+Jenkins-Docker-Integration/
+├── Dockerfile
+└── README.md
 ```
 
-### Start the Application
+## Dockerfile
 
-If the repository contains a `docker-compose.yml` file, run:
+The custom image uses Jenkins LTS with Java 21 and installs Docker tools.
 
-```bash
-docker compose up -d --build
+```dockerfile
+FROM jenkins/jenkins:lts-jdk21
+
+USER root
+
+RUN apt-get update \
+    && apt-get install -y docker.io \
+    && rm -rf /var/lib/apt/lists/*
+
+USER jenkins
 ```
 
-### Check Running Containers
+## Build the Image
 
 ```bash
-docker compose ps
+docker build -t week9-jenkins .
 ```
 
-### View Logs
+## Run Jenkins
 
 ```bash
-docker compose logs
+docker run -d --name week9-jenkins \
+  -p 8081:8080 \
+  -p 50000:50000 \
+  -v jenkins_home:/var/jenkins_home \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  week9-jenkins
 ```
 
-### Stop the Application
+Open Jenkins at `http://localhost:8081`.
 
-```bash
-docker compose down
-```
+**Security note:** Mounting the Docker socket gives Jenkins significant control over the host Docker daemon. Use this setup only in a trusted development environment.
 
 ## Key Learnings
 
-- Building and managing Docker images and containers.
-- Configuring container networking and port mapping.
-- Persisting data with Docker volumes.
-- Running multi-container applications with Docker Compose.
-- Publishing Docker images to Docker Hub.
+- Building a custom Jenkins Docker image.
+- Installing Docker tools in Jenkins.
+- Configuring Docker volumes and port mapping.
+- Connecting Jenkins to the Docker daemon.
 
 ## Author
 

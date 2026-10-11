@@ -1,6 +1,9 @@
-FROM nginx:latest
+FROM jenkins/jenkins:lts-jdk21
 
-COPY index.html /usr/share/nginx/html/index.html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+USER root
 
-EXPOSE 80
+RUN apt-get update \
+    && apt-get install -y docker.io \
+    && rm -rf /var/lib/apt/lists/*
+
+USER jenkins
