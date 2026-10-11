@@ -1,11 +1,11 @@
-# Week 9: CI/CD and Kubernetes Deployment
+# Week 9: CI/CD and Kubernates Deployment
 
 ## Objective
-Practise Kubernetes rolling updates, application verification, and rollback.
+Practise Kubernates rolling updates, application verification, and rollback.
 
 ## Environment
 - Docker
-- Kubernetes with kind
+- Kubernates with kind
 - kubectl
 - Git and GitHub
 
@@ -19,7 +19,7 @@ Commands used:
 - kubectl get pods -l app=week4-frontend
 
 ## Rollback
-Restored the previous working image using Kubernetes rollout undo.
+Restored the previous working image using Kubernates rollout undo.
 
 Commands:
 - kubectl rollout undo deployment/week4-frontend
@@ -32,4 +32,4 @@ Commands:
 - The frontend welcome page was accessible through port forwarding.
 
 ## Notes
-This exercise demonstrates Kubernetes rolling updates and rollback using an existing application. Jenkins pipeline automation and additional CI/CD evidence should be documented separately once verified.
+This exercise demonstrates Kubernates rolling updates and rollback using an existing application. Jenkins pipeline automation and additional CI/CD evidence should be documented separately once verified.
